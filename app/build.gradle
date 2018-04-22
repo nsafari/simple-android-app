@@ -30,6 +30,9 @@ dependencies {
     implementation "com.android.support:design:$supportLibraryVersion"
     // Google gson
     implementation 'com.google.code.gson:gson:2.8.2'
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
     // MultiDex
     implementation 'com.android.support:multidex:1.0.2'
     // RecyclerView Animator

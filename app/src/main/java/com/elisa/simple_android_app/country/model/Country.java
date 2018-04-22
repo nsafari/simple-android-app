@@ -1,4 +1,4 @@
-package com.elisa.simple_android_app.country;
+package com.elisa.simple_android_app.country.model;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;

@@ -4,7 +4,7 @@ import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.elisa.simple_android_app.country.Country;
+import com.elisa.simple_android_app.country.model.Country;
 import com.elisa.simple_android_app.infra.data.CountryContract.CountryEntry;
 
 import java.util.LinkedList;

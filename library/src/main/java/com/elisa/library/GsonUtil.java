@@ -1,4 +1,4 @@
-package com.elisa.library.gson;
+package com.elisa.library;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
