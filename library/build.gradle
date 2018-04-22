@@ -1,15 +1,18 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion sdkVersion.compile
+
     defaultConfig {
-        applicationId "elisa.com.simple_android_app"
         minSdkVersion sdkVersion.min
         targetSdkVersion sdkVersion.target
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -17,27 +20,13 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
-    }
-
 }
 
 dependencies {
-    implementation project(':library')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation "com.android.support:design:$supportLibraryVersion"
     // Google gson
     implementation 'com.google.code.gson:gson:2.8.2'
-    // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
-    // MultiDex
-    implementation 'com.android.support:multidex:1.0.2'
-    // RecyclerView Animator
-    implementation 'jp.wasabeef:recyclerview-animators:2.2.5'
-
-
 
 }
