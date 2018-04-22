@@ -2,10 +2,8 @@ package com.elisa.simple_android_app.country.endpoint;
 
 import com.elisa.library.GsonUtil;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class CountryEndpointImpl implements CountryEndpoint {
-    public static final String API_URL = "https://api.whichapp.com/";
+    public static final String API_URL = "https://api.whichapp.com/v1/";
 
     private static CountryEndpoint mCountryEndpoint;
 
@@ -46,8 +44,7 @@ public class CountryEndpointImpl implements CountryEndpoint {
         return mCountryEndpoint;
     }
 
-    public static <T> List<T> convertToRestResponse(String json) {
-        Type listType = new TypeToken<ArrayList<T>>(){}.getType();
+    public static <T> List<T> convertToRestResponse(String json, Type listType) {
         return new Gson().fromJson(json, listType);
     }
 

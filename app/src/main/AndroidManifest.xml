@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.elisa.simple_android_app">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".SimpleApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,6 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".infra.data.CountryContentProvider"
+            android:authorities="com.elisa.simple_android_app"
+            android:enabled="true"
+            android:exported="false"
+            android:syncable="true" />
+
     </application>
 
 </manifest>

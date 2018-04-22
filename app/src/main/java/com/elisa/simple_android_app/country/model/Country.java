@@ -115,6 +115,18 @@ public class Country extends BaseObservable implements Parcelable {
             return values;
         }
 
+        public static long deleteCountries(ContentResolver contentResolver) {
+            int deletedCount = -1;
+            try {
+                // delete countries from local db
+                deletedCount = contentResolver.delete(CountryEntry.CONTENT_URI, null, null);
+            }
+            catch (Exception ex){
+                Log.e(LOG_TAG, "Some error happened when trying to delete countries", ex);
+            }
+            return deletedCount;
+        }
+
         public static long insertCountries(ContentResolver contentResolver, List<Country> countries) {
             int insertedCount = -1;
             try {
@@ -128,7 +140,7 @@ public class Country extends BaseObservable implements Parcelable {
                     contentValuesList.add(getCountryContentValues(countries.get(i)));
                 }
 
-                // bulk Insert to local db
+                // Bulk Insert to local db
                 insertedCount = contentResolver.bulkInsert(CountryEntry.CONTENT_URI, contentValuesList.toArray(new ContentValues[0]));
             }
             catch (Exception ex){

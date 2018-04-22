@@ -6,7 +6,9 @@ import android.util.Log;
 import com.elisa.simple_android_app.SimpleApp;
 import com.elisa.simple_android_app.country.endpoint.CountryEndpointImpl;
 import com.elisa.simple_android_app.country.model.Country;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -44,7 +46,10 @@ public class CountryLoaderTask extends AsyncTask<Void, Void, List<Country>> {
                 Log.e(LOG_TAG, String.format("Some error happened when call getCountries endpoint. The error is %s => %s", countryResponse.raw(), countryResponse.errorBody().string()));
                 return countries;
             }
-            countries = CountryEndpointImpl.convertToRestResponse(countryResponse.body().string());
+            countries = CountryEndpointImpl.convertToRestResponse(countryResponse.body().string(), new TypeToken<ArrayList<Country>>(){}.getType());
+
+            // Delete current countries
+            Country.DBProxy.deleteCountries(SimpleApp.getContext().getContentResolver());
 
             // update local db
             Country.DBProxy.insertCountries(SimpleApp.getContext().getContentResolver(), countries);
