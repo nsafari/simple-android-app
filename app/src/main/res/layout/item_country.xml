@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="obj"
+            type="com.elisa.simple_android_app.country.model.Country" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/country_body"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@drawable/background_card"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/country_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="7dp"
+            android:text="@{obj.name}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/country_iso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:text="@{obj.iso}"
+            app:layout_constraintBottom_toBottomOf="@id/country_name"
+            app:layout_constraintLeft_toRightOf="@id/country_name"
+            app:layout_constraintTop_toTopOf="@id/country_name" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</layout>

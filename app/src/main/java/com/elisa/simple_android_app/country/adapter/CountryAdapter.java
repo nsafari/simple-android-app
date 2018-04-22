@@ -1,10 +1,17 @@
 package com.elisa.simple_android_app.country.adapter;
 
 import android.database.Cursor;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
+import com.elisa.simple_android_app.R;
 import com.elisa.simple_android_app.country.model.Country;
+import com.elisa.simple_android_app.infra.adapter.BaseViewHolder;
 import com.elisa.simple_android_app.infra.data.CountryContract.CountryEntry;
 
 import java.util.LinkedList;
@@ -14,8 +21,13 @@ import java.util.List;
  * Created by nSafari on 11/26/2017.
  */
 
-public class CountryAdapter  {
+public class CountryAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private static final String LOG_TAG = CountryAdapter.class.getSimpleName();
+    private List<Country> mCountires;
+
+    public CountryAdapter(List<Country> countries) {
+        mCountires = countries;
+    }
 
     // These indices are tied to COUNTRY_COLUMNS.  If COUNTRY_COLUMNS changes, these
     // must change.
@@ -76,5 +88,53 @@ public class CountryAdapter  {
                 CountryEntry.TABLE_NAME + "." + CountryEntry.COLUMN_NAME,
                 CountryEntry.TABLE_NAME + "." + CountryEntry.COLUMN_PHONE,
         };
+    }
+
+    public void setCountries(List<Country> countries) {
+        mCountires = countries;
+        notifyDataSetChanged();
+    }
+
+    @NonNull
+    @Override
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        ViewDataBinding binding;
+        int lastItemPosition = getItemCount() - 1;
+        // If create header view
+        if (viewType == 0) {
+            binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_header, parent, false);
+        } else if (viewType == lastItemPosition) {
+            // create footer view
+            binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_footer, parent, false);
+        } else {
+            // create country view
+            binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_country, parent, false);
+        }
+        return new BaseViewHolder(binding);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
+        int lastItemPosition = getItemCount() - 1;
+        // If this viewHolder does not have binding behaviour
+        if (position == 0 || position == lastItemPosition) {
+            return;
+        }
+        // first position used for header
+        holder.bind(mCountires.get(position - 1));
+    }
+
+    @Override
+    public int getItemCount() {
+        if (mCountires == null) {
+            return 0;
+        }
+        return mCountires.size() + 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 }

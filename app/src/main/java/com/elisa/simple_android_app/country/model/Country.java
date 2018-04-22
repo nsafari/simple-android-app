@@ -4,11 +4,13 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.elisa.simple_android_app.BR;
 import com.elisa.simple_android_app.country.adapter.CountryAdapter;
 import com.elisa.simple_android_app.infra.data.CountryContract.CountryEntry;
 import com.google.gson.annotations.Expose;
@@ -59,28 +61,34 @@ public class Country extends BaseObservable implements Parcelable {
         this.id = id;
     }
 
+    @Bindable
     public String getIso() {
         return iso;
     }
 
     public void setIso(String iso) {
         this.iso = iso;
+        notifyPropertyChanged(BR.iso);
     }
 
+    @Bindable
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+        notifyPropertyChanged(BR.name);
     }
 
+    @Bindable
     public int getPhone() {
         return phone;
     }
 
     public void setPhone(int phone) {
         this.phone = phone;
+        notifyPropertyChanged(BR.phone);
     }
 
     @Override

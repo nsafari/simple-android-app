@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">simple-android-app</string>
+    <string name="footer_section_title">Footer Section</string>
+    <string name="header_section_title">Header Section</string>
 </resources>
